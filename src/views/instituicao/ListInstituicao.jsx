@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button, Container, Divider, Header, Icon, Modal, Table } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
 
-export default function ListProduto() {
+export default function ListInstituicao() {
 
     const [lista, setLista] = useState([]);
     const [openModal, setOpenModal] = useState(false);
@@ -17,7 +17,7 @@ export default function ListProduto() {
 
     function carregarLista() {
 
-        axios.get("http://localhost:3000/api/produto")
+        axios.get("http://localhost:3000/api/instituicao")
             .then((response) => {
                 setLista(response.data)
             })
@@ -37,18 +37,18 @@ export default function ListProduto() {
     }
     async function remover() {
 
-        await axios.delete('http://localhost:3000/api/produto/' + idRemover)
+        await axios.delete('http://localhost:3000/api/instituicao/' + idRemover)
             .then((response) => {
 
-                console.log('Produto removido com sucesso.')
+                console.log('Instituição removido com sucesso.')
 
-                axios.get("http://localhost:3000/api/produto")
+                axios.get("http://localhost:3000/api/instituicao")
                     .then((response) => {
                         setLista(response.data)
                     })
             })
             .catch((error) => {
-                console.log('Erro ao remover um produto.')
+                console.log('Erro ao remover um instituição.')
             })
         setOpenModal(false)
     }
@@ -60,7 +60,7 @@ export default function ListProduto() {
 
                 <Container textAlign='justified' >
 
-                    <h2> Produto </h2>
+                    <h2> Instituição </h2>
                     <Divider />
 
                     <div style={{ marginTop: '4%' }}>
@@ -71,7 +71,7 @@ export default function ListProduto() {
                             icon='clipboard outline'
                             floated='right'
                             as={Link}
-                            to='/form-produto'
+                            to='/form-instituicao'
                         />
                         <br /><br /><br />
 
@@ -79,47 +79,64 @@ export default function ListProduto() {
 
                             <Table.Header>
                                 <Table.Row>
-                                    <Table.HeaderCell>Codigo de barras do produto</Table.HeaderCell>
-                                    <Table.HeaderCell>Descrição</Table.HeaderCell>
-                                    <Table.HeaderCell>Data de fabricação</Table.HeaderCell>
-                                    <Table.HeaderCell>Data de validade</Table.HeaderCell>
-                                    <Table.HeaderCell>Quantidade</Table.HeaderCell>
-                                    <Table.HeaderCell>Observações</Table.HeaderCell>
-                                    <Table.HeaderCell>A imagem do produto</Table.HeaderCell>
+                                    <Table.HeaderCell>Nome da instituição</Table.HeaderCell>
+                                    <Table.HeaderCell>CNPJ da instituição</Table.HeaderCell>
+                                    <Table.HeaderCell>Endereço da instituição</Table.HeaderCell>
+                                    <Table.HeaderCell>Telefone da instituição</Table.HeaderCell>
+                                    <Table.HeaderCell>Finalidade</Table.HeaderCell>
+                                    <Table.HeaderCell>Email da instituicao</Table.HeaderCell>
+                                    <Table.HeaderCell>Redes sociais da intituição</Table.HeaderCell>
+                                    <Table.HeaderCell>Data da constituição</Table.HeaderCell>
+                                    <Table.HeaderCell>Comprovante de cadastro</Table.HeaderCell>
+                                    <Table.HeaderCell>Nome do responsavel</Table.HeaderCell>
+                                    <Table.HeaderCell>CPF do responsavel</Table.HeaderCell>
+                                    <Table.HeaderCell>Telefone do responsavel</Table.HeaderCell>
+                                    <Table.HeaderCell>Email do responsavel</Table.HeaderCell>
+                                    <Table.HeaderCell>Cargo do responsavel</Table.HeaderCell>
+                                    <Table.HeaderCell>Senha de acesso</Table.HeaderCell>
                                     <Table.HeaderCell textAlign='center'>Ações</Table.HeaderCell>
                                 </Table.Row>
                             </Table.Header>
 
                             <Table.Body>
 
-                                {lista.map(produto => (
+                                {lista.map(instituicao => (
 
-                                    <Table.Row key={produto.id}>
-                                        <Table.Cell>{produto.CodigoDeBarrasDoProduto}</Table.Cell>
-                                        <Table.Cell>{produto.Descrição}</Table.Cell>
-                                        <Table.Cell>{formatarData(produto.DataDeFabricação)}</Table.Cell>
-                                         <Table.Cell>{formatarData(produto.DataDeValidade)}</Table.Cell>
-                                        <Table.Cell>{produto.Quantidade}</Table.Cell>
-                                        <Table.Cell>{produto.Observações}</Table.Cell>
-                                        <Table.Cell>{produto.AnexeAquiUmaOuMaisImagensDoProduto}</Table.Cell>
+                                    <Table.Row key={instituicao.id}>
+                                        <Table.Cell>{instituicao.NomeInstituicao}</Table.Cell>
+                                        <Table.Cell>{instituicao.CNPJInstituicao}</Table.Cell>
+                                         <Table.Cell>{instituicao.EnderecoInstituicao}</Table.Cell>
+                                          <Table.Cell>{instituicao.TelefoneInstituicao}</Table.Cell>
+                                           <Table.Cell>{instituicao.Finalidade}</Table.Cell>
+                                            <Table.Cell>{instituicao.EmailInstituicao}</Table.Cell>
+                                            <Table.Cell>{instituicao.RedesSociaisIntituicao}</Table.Cell>
+                                        <Table.Cell>{formatarData(instituicao.DataConstituicao)}</Table.Cell>
+                                        <Table.Cell>{instituicao.ComprovanteCadastro}</Table.Cell>
+                                        <Table.Cell>{instituicao.Observações}</Table.Cell>
+                                        <Table.Cell>{instituicao.NomeResponsavel}</Table.Cell>
+                                         <Table.Cell>{instituicao.CpfReponsavel}</Table.Cell>
+                                          <Table.Cell>{instituicao.TelefoneResponsavel}</Table.Cell>
+                                           <Table.Cell>{instituicao.EmailResponsavel}</Table.Cell>
+                                            <Table.Cell>{instituicao.CargoReponsavel}</Table.Cell>
+                                             <Table.Cell>{instituicao.SenhaAcesso}</Table.Cell>
                                         <Table.Cell textAlign='center'>
 
                                             <Button
                                                 inverted
                                                 circular
                                                 color='green'
-                                                title='Clique aqui para editar os dados deste produto'
+                                                title='Clique aqui para editar os dados da instituição.'
                                                 icon>
-                                                <Link to="/form-produto" state={{ id: produto.id }} style={{ color: 'green' }}> <Icon name='edit' /> </Link>
+                                                <Link to="/form-instituicao" state={{ id: instituicao.id }} style={{ color: 'green' }}> <Icon name='edit' /> </Link>
 
                                             </Button> &nbsp;
                                             <Button
                                                 inverted
                                                 circular
                                                 color='red'
-                                                title='Clique aqui para remover este produto'
+                                                title='Clique aqui para remover a instituição'
                                                 icon
-                                                onClick={e => confirmaRemover(produto.id)}>
+                                                onClick={e => confirmaRemover(instituicao.id)}>
 
                                                 <Icon name='trash' />
                                             </Button>

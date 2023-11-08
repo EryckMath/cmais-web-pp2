@@ -115,8 +115,6 @@ function salvar() {
                                     fluid
                                     label='Descrição'>
                                     <InputMask
-                                        required
-                                        mask="999.999.999-99"
                                         value={Descrição}
                                         onChange={e => setDescrição(e.target.value)}
                                     />
