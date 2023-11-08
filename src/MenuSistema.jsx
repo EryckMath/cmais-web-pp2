@@ -17,22 +17,22 @@ class MenuSistema extends React.Component {
 
                     <Menu.Item
                         name='home'
-                        active={this.state.activeItem === 'home'}
+                        active={this.state.activeItem === 'Página Inicial'}
                         onClick={this.handleItemClick}
                         as={Link}
                         to='/'
                     />
                     <Menu.Item
                         name='instituicao'
-                        active={this.state.activeItem === 'instituição'}
+                        active={this.state.activeItem === 'Instituição'}
                         onClick={this.handleItemClick}
                         as={Link}
-                        to='/form-instuicao'
+                        to='/form-instituicao'
                     />
 
                     <Menu.Item
                         name='mercado'
-                        active={this.state.activeItem === 'mercado'}
+                        active={this.state.activeItem === 'Mercado'}
                         onClick={this.handleItemClick}
                         as={Link}
                         to='/form-mercado'
@@ -40,7 +40,7 @@ class MenuSistema extends React.Component {
 
                     <Menu.Item
                         name='produto'
-                        active={this.state.activeItem === 'produto'}
+                        active={this.state.activeItem === 'Produto'}
                         onClick={this.handleItemClick}
                         as={Link}
                         to='/form-produto'
