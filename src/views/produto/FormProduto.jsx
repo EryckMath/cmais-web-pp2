@@ -8,7 +8,7 @@ import MenuSistema from '../../MenuSistema';
 export default function FormProduto() {
     const { state } = useLocation();
     const [idProduto, setIdProduto] = useState();
-    
+
 
     const [CodigoDeBarrasDoProduto, setCodigoDeBarrasDoProduto] = useState();
     const [Descrição, setDescrição] = useState();
@@ -18,61 +18,65 @@ export default function FormProduto() {
     const [Observações, setObservações] = useState();
     const [AnexeAquiUmaOuMaisImagensDoProduto, setAnexeAquiUmaOuMaisImagensDoProduto] = useState();
 
-    
+
     useEffect(() => {
 
         if (state != null && state.id != null) {
 
             axios.get("http://localhost:3000/api/produto/" + state.id)
-                       .then((response) => {
-                           setIdProduto(response.data.id)
-                           setCodigoDeBarrasDoProduto(response.data.CodigoDeBarrasDoProduto)
-                           setDescrição(response.data.Descrição)
-                           setDataDeFabricação(formatarData(response.data.DataDeFabricação))
-                           setDataDeValidade(formatarData(response.data.DataDeValidade))
-                           setQuantidade(response.data.Quantidade)
-                           setObservações(response.data.Observações)
-                            setAnexeAquiUmaOuMaisImagensDoProduto(response.data.AnexeAquiUmaOuMaisImagensDoProduto)
-            })
+                .then((response) => {
+                    setIdProduto(response.data.id)
+                    setCodigoDeBarrasDoProduto(response.data.CodigoDeBarrasDoProduto)
+                    setDescrição(response.data.Descrição)
+                    setDataDeFabricação(formatarData(response.data.DataDeFabricação))
+                    setDataDeValidade(formatarData(response.data.DataDeValidade))
+                    setQuantidade(response.data.Quantidade)
+                    setObservações(response.data.Observações)
+                    setAnexeAquiUmaOuMaisImagensDoProduto(response.data.AnexeAquiUmaOuMaisImagensDoProduto)
+                })
         }
-}, [state])
+    }, [state])
 
-function formatarData(dataParam) {
+    function formatarData(dataParam) {
 
-    if (dataParam === null || dataParam === '' || dataParam === undefined) {
-        return ''
+        if (dataParam === null || dataParam === '' || dataParam === undefined) {
+            return ''
+        }
+
+        let arrayData = dataParam.split('-');
+        return arrayData[2] + '/' + arrayData[1] + '/' + arrayData[0];
     }
 
-    let arrayData = dataParam.split('-');
-    return arrayData[2] + '/' + arrayData[1] + '/' + arrayData[0];
-}
+    function salvar() {
 
-function salvar() {
+        let produtoRequest = {
+            CodigoDeBarrasDoProduto: CodigoDeBarrasDoProduto,
+            Descrição: Descrição,
+            DataDeFabricação: DataDeFabricação,
+            DataDeValidade: DataDeValidade,
+            Quantidade: Quantidade,
+            Observações: Observações,
+            AnexeAquiUmaOuMaisImagensDoProduto: AnexeAquiUmaOuMaisImagensDoProduto
+        }
 
-    let produtoRequest = {
-        CodigoDeBarrasDoProduto: CodigoDeBarrasDoProduto,
-        Descrição: Descrição,
-        DataDeFabricação: DataDeFabricação,
-        DataDeValidade: DataDeValidade,
-        Quantidade: Quantidade,
-        Observações: Observações,
-        AnexeAquiUmaOuMaisImagensDoProduto: AnexeAquiUmaOuMaisImagensDoProduto
+        if (setIdProduto != null) { //Alteração:
+            axios.put("http://localhost:3000/api/produto/" + idProduto, produtoRequest)
+                .then((response) => {
+                    console.log('Produto alterado com sucesso.')
+                })
+                .catch((error) => {
+                    console.log('Erro ao alterar um produto.')
+                })
+        } else { //Cadastro:
+            axios.post("http://localhost:3000/api/produto", produtoRequest)
+                .then((response) => {
+                    console.log('Produto cadastrado com sucesso.')
+                })
+                .catch((error) => {
+                    console.log('Erro ao incluir o produto.')
+                })
+        }
     }
-
-    if (setIdProduto != null) { //Alteração:
-        axios.put("http://localhost:3000/api/produto/" + idProduto, produtoRequest)
-        .then((response) => { console.log('Produto alterado com sucesso.') 
-    })
-        .catch((error) => { console.log('Erro ao alterar um produto.') 
-    })
-    } else { //Cadastro:
-        axios.post("http://localhost:3000/api/produto", produtoRequest)
-        .then((response) => { console.log('Produto cadastrado com sucesso.') 
-    })
-        .catch((error) => { console.log('Erro ao incluir o produto.') 
-    })
-    }
-}
 
 
     return (
@@ -85,12 +89,12 @@ function salvar() {
 
                 <Container textAlign='justified' >
 
-                { idProduto === undefined &&
-    <h2> <span style={{color: 'darkgray'}}> Produto &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro</h2>
-}
-{ idProduto != undefined &&
-    <h2> <span style={{color: 'darkgray'}}> Produto &nbsp;<Icon name='angle double right' size="small" /> </span> Alteração</h2>
-}
+                    {idProduto === undefined &&
+                        <h2> <span style={{ color: 'darkgray' }}> Produto &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro</h2>
+                    }
+                    {idProduto != undefined &&
+                        <h2> <span style={{ color: 'darkgray' }}> Produto &nbsp;<Icon name='angle double right' size="small" /> </span> Alteração</h2>
+                    }
 
                     <Divider />
 
@@ -136,9 +140,9 @@ function salvar() {
                                         value={DataDeFabricação}
                                         onChange={e => setDataDeFabricação(e.target.value)}
                                     />
-                                </Form.Input> 
+                                </Form.Input>
 
-                                 <Form.Input
+                                <Form.Input
                                     fluid
                                     label='Data de validade'
                                     width={6}

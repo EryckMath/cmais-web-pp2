@@ -98,7 +98,7 @@ export default function ListProduto() {
                                         <Table.Cell>{produto.CodigoDeBarrasDoProduto}</Table.Cell>
                                         <Table.Cell>{produto.Descrição}</Table.Cell>
                                         <Table.Cell>{formatarData(produto.DataDeFabricação)}</Table.Cell>
-                                         <Table.Cell>{formatarData(produto.DataDeValidade)}</Table.Cell>
+                                        <Table.Cell>{formatarData(produto.DataDeValidade)}</Table.Cell>
                                         <Table.Cell>{produto.Quantidade}</Table.Cell>
                                         <Table.Cell>{produto.Observações}</Table.Cell>
                                         <Table.Cell>{produto.AnexeAquiUmaOuMaisImagensDoProduto}</Table.Cell>

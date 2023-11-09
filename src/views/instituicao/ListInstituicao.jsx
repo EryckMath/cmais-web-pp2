@@ -105,20 +105,20 @@ export default function ListInstituicao() {
                                     <Table.Row key={instituicao.id}>
                                         <Table.Cell>{instituicao.NomeInstituicao}</Table.Cell>
                                         <Table.Cell>{instituicao.CNPJInstituicao}</Table.Cell>
-                                         <Table.Cell>{instituicao.EnderecoInstituicao}</Table.Cell>
-                                          <Table.Cell>{instituicao.TelefoneInstituicao}</Table.Cell>
-                                           <Table.Cell>{instituicao.Finalidade}</Table.Cell>
-                                            <Table.Cell>{instituicao.EmailInstituicao}</Table.Cell>
-                                            <Table.Cell>{instituicao.RedesSociaisIntituicao}</Table.Cell>
+                                        <Table.Cell>{instituicao.EnderecoInstituicao}</Table.Cell>
+                                        <Table.Cell>{instituicao.TelefoneInstituicao}</Table.Cell>
+                                        <Table.Cell>{instituicao.Finalidade}</Table.Cell>
+                                        <Table.Cell>{instituicao.EmailInstituicao}</Table.Cell>
+                                        <Table.Cell>{instituicao.RedesSociaisIntituicao}</Table.Cell>
                                         <Table.Cell>{formatarData(instituicao.DataConstituicao)}</Table.Cell>
                                         <Table.Cell>{instituicao.ComprovanteCadastro}</Table.Cell>
                                         <Table.Cell>{instituicao.Observações}</Table.Cell>
                                         <Table.Cell>{instituicao.NomeResponsavel}</Table.Cell>
-                                         <Table.Cell>{instituicao.CpfReponsavel}</Table.Cell>
-                                          <Table.Cell>{instituicao.TelefoneResponsavel}</Table.Cell>
-                                           <Table.Cell>{instituicao.EmailResponsavel}</Table.Cell>
-                                            <Table.Cell>{instituicao.CargoReponsavel}</Table.Cell>
-                                             <Table.Cell>{instituicao.SenhaAcesso}</Table.Cell>
+                                        <Table.Cell>{instituicao.CpfReponsavel}</Table.Cell>
+                                        <Table.Cell>{instituicao.TelefoneResponsavel}</Table.Cell>
+                                        <Table.Cell>{instituicao.EmailResponsavel}</Table.Cell>
+                                        <Table.Cell>{instituicao.CargoReponsavel}</Table.Cell>
+                                        <Table.Cell>{instituicao.SenhaAcesso}</Table.Cell>
                                         <Table.Cell textAlign='center'>
 
                                             <Button

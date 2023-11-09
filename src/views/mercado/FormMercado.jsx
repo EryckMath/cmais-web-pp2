@@ -10,29 +10,28 @@ export default function FormMercado() {
     const { state } = useLocation();
     const [idMercado, setIdMercado] = useState();
 
-
-    const [NomeDoEmpreendimento, setNomeEmprendimento] = useState();
-    const [TipoDeEmpreendimento, settipoEmpreendemento] = useState();
-    const [TelefoneParaContato, setTelefoneContato] = useState();
-    const [Endereco, setendereco] = useState();
-    const [RedesSocias, setRedessociais] = useState();
-    const [NomeCompletoDoResponsavelPorCadastrar, setNomeRespon] = useState();
-    const [Cargoercado, setcargoRes] = useState();
-    const [SenhaDeAcesso, setSenha] = useState();
+    const [nomeEmpreendimento, setNomeEmprendimento] = useState();
+    const [tipoEmpreendimento, setTipoEmpreendimento] = useState();
+    const [telefoneContato, setTelefoneContato] = useState();
+    const [endereco, setEndereco] = useState();
+    const [redesSociais, setRedesSociais] = useState();
+    const [nomeCompletoResponsavel, setNomeCompletoResponsavel] = useState();
+    const [cargoResponsavel, setCargoResponsavel] = useState();
+    const [senhaDeAcesso, setSenhaDeAcesso] = useState();
 
     useEffect(() => {
         if (state != null && state.id != null) {
             axios.get("http://localhost:3000/api/Mercado/" + state.id)
                 .then((response) => {
                     setIdMercado(response.data.id)
-                    setNomeEmprendimento(response.data.NomeDoEmpreendimento)
-                    settipoEmpreendemento(response.data.TipoDeEmpreendimento)
-                    setTelefoneContato(response.data.TelefoneParaContato)
-                    setendereco(response.data.Endereco)
-                    setRedessociais(response.data.RedesSocias)
-                    setNomeRespon(response.data.NomeCompletoDoResponsavelPorCadastrar)
-                    setcargoRes(response.data.Cargoercado)
-                    setSenha(response.data.SenhaDeAcesso)
+                    setNomeEmprendimento(response.data.nomeEmpreendimento)
+                    setTipoEmpreendimento(response.data.tipoEmpreendimento)
+                    setTelefoneContato(response.data.telefoneContato)
+                    setEndereco(response.data.endereco)
+                    setRedesSociais(response.data.redesSociais)
+                    setNomeCompletoResponsavel(response.data.nomeCompletoResponsavel)
+                    setCargoResponsavel(response.data.cargoResponsavel)
+                    setSenhaDeAcesso(response.data.senhaDeAcesso)
                 })
         }
     }, [state])
@@ -40,14 +39,14 @@ export default function FormMercado() {
     function salvar() {
 
         let MercadoRequest = {
-            NomeDoEmpreendimento: NomeDoEmpreendimento,
-            TipoDeEmpreendimento: TipoDeEmpreendimento,
-            TelefoneParaContato: TelefoneParaContato,
-            Endereco: Endereco,
-            RedesSocias: RedesSocias,
-            NomeCompletoDoResponsavelPorCadastrar: NomeCompletoDoResponsavelPorCadastrar,
-            Cargoercado: Cargoercado,
-            SenhaDeAcesso: SenhaDeAcesso
+            nomeEmpreendimento: nomeEmpreendimento,
+            tipoEmpreendimento: tipoEmpreendimento,
+            telefoneContato: telefoneContato,
+            endereco: endereco,
+            redesSociais: redesSociais,
+            nomeCompletoResponsavel: nomeCompletoResponsavel,
+            cargoResponsavel: cargoResponsavel,
+            senhaDeAcesso: senhaDeAcesso
         }
 
         if (idMercado != null) { //Alteração:
@@ -78,7 +77,6 @@ export default function FormMercado() {
                         <h2> <span style={{ color: 'darkgray' }}> mercado &nbsp;<Icon name='angle double right' size="small" /> </span> Alteração</h2>
                     }
 
-
                     <Divider />
 
                     <div style={{ marginTop: '4%' }}>
@@ -92,7 +90,7 @@ export default function FormMercado() {
                                     fluid
                                     label='Nome do Empreendimento:'
                                     maxLength="100"
-                                    value={NomeDoEmpreendimento}
+                                    value={nomeEmpreendimento}
                                     onChange={e => setNomeEmprendimento(e.target.value)}
                                 />
 
@@ -102,9 +100,9 @@ export default function FormMercado() {
                                     label='CNPJ'>
                                     <InputMask
                                         required
-                                        label= 'Qual o seu tipo de empreendimento?'
-                                        value={TipoDeEmpreendimento}
-                                        onChange={e => settipoEmpreendemento(e.target.value)}
+                                        label='Qual o seu tipo de empreendimento?'
+                                        value={tipoEmpreendimento}
+                                        onChange={e => setTipoEmpreendimento(e.target.value)}
                                     />
                                 </Form.Input>
 
@@ -117,8 +115,8 @@ export default function FormMercado() {
                                     fluid
                                     label='Endereço'
                                     maxLength="100"
-                                    value={Endereco}
-                                    onChange={e => setendereco(e.target.value)}
+                                    value={endereco}
+                                    onChange={e => setEndereco(e.target.value)}
                                 />
 
                                 <Form.Input
@@ -128,7 +126,7 @@ export default function FormMercado() {
                                     width={6}>
                                     <InputMask
                                         mask="(99) 9999.9999"
-                                        value={TelefoneParaContato}
+                                        value={telefoneContato}
                                         onChange={e => setTelefoneContato(e.target.value)}
                                     />
                                 </Form.Input>
@@ -141,8 +139,8 @@ export default function FormMercado() {
                                     fluid
                                     label='Rede social (Instagram/Facebook):'
                                     maxLength="100"
-                                    value={redesSociaisMercado}
-                                    onChange={e => setRedessociais(e.target.value)}
+                                    value={redesSociais}
+                                    onChange={e => setRedesSociais(e.target.value)}
                                 >
                                 </Form.Input>
 
@@ -151,8 +149,8 @@ export default function FormMercado() {
                                     fluid
                                     label='Nome completo do responsável:'
                                     maxLength="100"
-                                    value={NomeCompletoDoResponsavelPorCadastrar}
-                                    onChange={e => setNomeRespon(e.target.value)}
+                                    value={nomeCompletoResponsavel}
+                                    onChange={e => setNomeCompletoResponsavel(e.target.value)}
                                 >
                                 </Form.Input>
 
@@ -162,7 +160,7 @@ export default function FormMercado() {
                                     label='Cargo:'
                                     maxLength="100"
                                     value={cargoResponsavel}
-                                    onChange={e => setcargoRes(e.target.value)}
+                                    onChange={e => setCargoResponsavel(e.target.value)}
                                 >
                                 </Form.Input>
 
@@ -173,8 +171,8 @@ export default function FormMercado() {
                                     fluid
                                     label='Crie uma senha'
                                     maxLength="100"
-                                    value={SenhaDeAcesso}
-                                    onChange={e => setSenha(e.target.value)}
+                                    value={senhaDeAcesso}
+                                    onChange={e => setSenhaDeAcesso(e.target.value)}
                                 >
                                 </Form.Input>
 
@@ -220,3 +218,4 @@ export default function FormMercado() {
     );
 
 }
+
