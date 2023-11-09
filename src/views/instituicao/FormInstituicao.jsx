@@ -1,7 +1,7 @@
 import axios from "axios";
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import InputMask from 'react-input-mask';
-import { useLocation, Link  } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 import MenuSistema from "../../MenuSistema";
 
