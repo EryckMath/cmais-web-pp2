@@ -32,7 +32,7 @@ export default function FormMercado() {
                     setRedessociais(response.data.RedesSocias)
                     setNomeRespon(response.data.NomeCompletoDoResponsavelPorCadastrar)
                     setcargoRes(response.data.Cargoercado)
-                    setSenhaAcesso(response.data.SenhaDeAcesso)
+                    setSenha(response.data.SenhaDeAcesso)
                 })
         }
     }, [state])
@@ -174,7 +174,7 @@ export default function FormMercado() {
                                     label='Crie uma senha'
                                     maxLength="100"
                                     value={SenhaDeAcesso}
-                                    onChange={e => setSenhaAcesso(e.target.value)}
+                                    onChange={e => setSenha(e.target.value)}
                                 >
                                 </Form.Input>
 
