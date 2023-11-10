@@ -10,29 +10,29 @@ export default function FormProduto() {
     const [idProduto, setIdProduto] = useState();
 
 
-    const [CodigoDeBarrasDoProduto, setCodigoDeBarrasDoProduto] = useState();
-    const [Descrição, setDescrição] = useState();
-    const [DataDeFabricação, setDataDeFabricação] = useState();
-    const [DataDeValidade, setDataDeValidade] = useState();
-    const [Quantidade, setQuantidade] = useState();
-    const [Observações, setObservações] = useState();
-    const [AnexeAquiUmaOuMaisImagensDoProduto, setAnexeAquiUmaOuMaisImagensDoProduto] = useState();
+    const [codigoDeBarras, setCodigoDeBarras] = useState();
+    const [descricao, setDescricao] = useState();
+    const [dataDeFabricacao, setDataDeFabricacao] = useState();
+    const [dataDeValidade, setDataDeValidade] = useState();
+    const [quantidade, setQuantidade] = useState();
+    const [observacoes, setObservacoes] = useState();
+    const [anexoImagem, setAnexoImagem] = useState();
 
 
     useEffect(() => {
 
         if (state != null && state.id != null) {
 
-            axios.get("http://localhost:3000/api/produto/" + state.id)
+            axios.get("http://localhost:8080/api/produto/" + state.id)
                 .then((response) => {
                     setIdProduto(response.data.id)
-                    setCodigoDeBarrasDoProduto(response.data.CodigoDeBarrasDoProduto)
-                    setDescrição(response.data.Descrição)
-                    setDataDeFabricação(formatarData(response.data.DataDeFabricação))
-                    setDataDeValidade(formatarData(response.data.DataDeValidade))
-                    setQuantidade(response.data.Quantidade)
-                    setObservações(response.data.Observações)
-                    setAnexeAquiUmaOuMaisImagensDoProduto(response.data.AnexeAquiUmaOuMaisImagensDoProduto)
+                    setCodigoDeBarras(response.data.codigoDeBarras)
+                    setDescricao(response.data.descricao)
+                    setDataDeFabricacao(formatarData(response.data.dataDeFabricacao))
+                    setDataDeValidade(formatarData(response.data.dataDeValidade))
+                    setQuantidade(response.data.quantidade)
+                    setObservacoes(response.data.observacoes)
+                    setAnexoImagem(response.data.anexoImagem)
                 })
         }
     }, [state])
@@ -50,17 +50,17 @@ export default function FormProduto() {
     function salvar() {
 
         let produtoRequest = {
-            CodigoDeBarrasDoProduto: CodigoDeBarrasDoProduto,
-            Descrição: Descrição,
-            DataDeFabricação: DataDeFabricação,
-            DataDeValidade: DataDeValidade,
-            Quantidade: Quantidade,
-            Observações: Observações,
-            AnexeAquiUmaOuMaisImagensDoProduto: AnexeAquiUmaOuMaisImagensDoProduto
+            codigoDeBarras: codigoDeBarras,
+            descricao: descricao,
+            dataDeFabricação: dataDeFabricacao,
+            dataDeValidade: dataDeValidade,
+            quantidade: quantidade,
+            observacoes: observacoes,
+            anexoImagem: anexoImagem
         }
 
         if (setIdProduto != null) { //Alteração:
-            axios.put("http://localhost:3000/api/produto/" + idProduto, produtoRequest)
+            axios.put("http://localhost:8080/api/produto/" + idProduto, produtoRequest)
                 .then((response) => {
                     console.log('Produto alterado com sucesso.')
                 })
@@ -68,7 +68,7 @@ export default function FormProduto() {
                     console.log('Erro ao alterar um produto.')
                 })
         } else { //Cadastro:
-            axios.post("http://localhost:3000/api/produto", produtoRequest)
+            axios.post("http://localhost:8080/api/produto", produtoRequest)
                 .then((response) => {
                     console.log('Produto cadastrado com sucesso.')
                 })
@@ -109,8 +109,8 @@ export default function FormProduto() {
                                     fluid
                                     label='Codigo de barras do produto'
                                     maxLength="100"
-                                    value={CodigoDeBarrasDoProduto}
-                                    onChange={e => setCodigoDeBarrasDoProduto(e.target.value)}
+                                    value={codigoDeBarras}
+                                    onChange={e => setCodigoDeBarras(e.target.value)}
 
                                 />
 
@@ -119,8 +119,8 @@ export default function FormProduto() {
                                     fluid
                                     label='Descrição'>
                                     <InputMask
-                                        value={Descrição}
-                                        onChange={e => setDescrição(e.target.value)}
+                                        value={descricao}
+                                        onChange={e => setDescricao(e.target.value)}
                                     />
                                 </Form.Input>
 
@@ -137,8 +137,8 @@ export default function FormProduto() {
                                         mask="99/99/9999"
                                         maskChar={null}
                                         placeholder="Ex: 20/11/2023"
-                                        value={DataDeFabricação}
-                                        onChange={e => setDataDeFabricação(e.target.value)}
+                                        value={dataDeFabricacao}
+                                        onChange={e => setDataDeFabricacao(e.target.value)}
                                     />
                                 </Form.Input>
 
@@ -151,8 +151,42 @@ export default function FormProduto() {
                                         mask="99/99/9999"
                                         maskChar={null}
                                         placeholder="Ex: 20/11/2023"
-                                        value={DataDeValidade}
+                                        value={dataDeValidade}
                                         onChange={e => setDataDeValidade(e.target.value)}
+                                    />
+                                </Form.Input>
+
+                                <Form.Input
+                                    required
+                                    fluid
+                                    label='Quantidade'>
+                                    <InputMask
+                                        value={quantidade}
+                                        onChange={e => setQuantidade(e.target.value)}
+                                    />
+                                </Form.Input>
+
+                                <Form.Input
+                                    required
+                                    fluid
+                                    label='Observações'>
+                                    <InputMask
+                                        value={observacoes}
+                                        onChange={e => setObservacoes(e.target.value)}
+                                    />
+                                </Form.Input>
+
+                            </Form.Group>
+
+                            <Form.Group widths='equal'>
+
+                            <Form.Input
+                                    required
+                                    fluid
+                                    label='Anexe aqui uma ou mais imagens do produto'>
+                                    <InputMask
+                                        value={anexoImagem}
+                                        onChange={e => setAnexoImagem(e.target.value)}
                                     />
                                 </Form.Input>
 
@@ -184,7 +218,7 @@ export default function FormProduto() {
                                 onClick={() => salvar()}
                             >
                                 <Icon name='save' />
-                                Salvar
+                                Cadastrar
                             </Button>
 
 

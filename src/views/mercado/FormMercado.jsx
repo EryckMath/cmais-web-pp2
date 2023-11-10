@@ -11,6 +11,7 @@ export default function FormMercado() {
     const [idMercado, setIdMercado] = useState();
 
     const [nomeEmpreendimento, setNomeEmprendimento] = useState();
+    const [cnpjEmpreendimento, setCnpjEmpreendimento] = useState();
     const [tipoEmpreendimento, setTipoEmpreendimento] = useState();
     const [telefoneContato, setTelefoneContato] = useState();
     const [endereco, setEndereco] = useState();
@@ -21,10 +22,11 @@ export default function FormMercado() {
 
     useEffect(() => {
         if (state != null && state.id != null) {
-            axios.get("http://localhost:3000/api/Mercado/" + state.id)
+            axios.get("http://localhost:8080/api/Mercado/" + state.id)
                 .then((response) => {
                     setIdMercado(response.data.id)
                     setNomeEmprendimento(response.data.nomeEmpreendimento)
+                    setCnpjEmpreendimento(response.data.cnpjEmpreendimento)
                     setTipoEmpreendimento(response.data.tipoEmpreendimento)
                     setTelefoneContato(response.data.telefoneContato)
                     setEndereco(response.data.endereco)
@@ -40,6 +42,7 @@ export default function FormMercado() {
 
         let MercadoRequest = {
             nomeEmpreendimento: nomeEmpreendimento,
+            cnpjEmpreendimento: cnpjEmpreendimento,
             tipoEmpreendimento: tipoEmpreendimento,
             telefoneContato: telefoneContato,
             endereco: endereco,
@@ -50,11 +53,11 @@ export default function FormMercado() {
         }
 
         if (idMercado != null) { //Alteração:
-            axios.put("http://localhost:3000/api/Mercado/" + idMercado, MercadoRequest)
+            axios.put("http://localhost:8080/api/Mercado/" + idMercado, MercadoRequest)
                 .then((response) => { console.log('mercado alterada com sucesso.') })
                 .catch((error) => { console.log('Erro ao alterar uma mercado.') })
         } else { //Cadastro:
-            axios.post("http://localhost:3000/api/Mercado", MercadoRequest)
+            axios.post("http://localhost:8080/api/Mercado", MercadoRequest)
                 .then((response) => { console.log('Mercado cadastrada com sucesso.') })
                 .catch((error) => { console.log('Erro ao incluir a mercado.') })
         }
@@ -71,10 +74,10 @@ export default function FormMercado() {
                 <Container textAlign='justified' >
 
                     {idMercado === undefined &&
-                        <h2> <span style={{ color: 'darkgray' }}> mercado &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro</h2>
+                        <h2> <span style={{ color: 'darkgray' }}> Mercado &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro</h2>
                     }
                     {idMercado !== undefined &&
-                        <h2> <span style={{ color: 'darkgray' }}> mercado &nbsp;<Icon name='angle double right' size="small" /> </span> Alteração</h2>
+                        <h2> <span style={{ color: 'darkgray' }}> Mercado &nbsp;<Icon name='angle double right' size="small" /> </span> Alteração</h2>
                     }
 
                     <Divider />
@@ -100,15 +103,27 @@ export default function FormMercado() {
                                     label='CNPJ'>
                                     <InputMask
                                         required
-                                        label='Qual o seu tipo de empreendimento?'
-                                        value={tipoEmpreendimento}
-                                        onChange={e => setTipoEmpreendimento(e.target.value)}
+                                        label='CNPJ'
+                                        value={cnpjEmpreendimento}
+                                        onChange={e => setCnpjEmpreendimento(e.target.value)}
                                     />
                                 </Form.Input>
 
                             </Form.Group>
 
                             <Form.Group widths='equal'>
+
+                            <Form.Input
+                                    required
+                                    fluid
+                                    label='Tipo Empreendimento'>
+                                    <InputMask
+                                        required
+                                        label='Tipo Empreendimento'
+                                        value={tipoEmpreendimento}
+                                        onChange={e => setTipoEmpreendimento(e.target.value)}
+                                    />
+                                </Form.Input>
 
                                 <Form.Input
                                     required
@@ -204,7 +219,7 @@ export default function FormMercado() {
                                 onClick={() => salvar()}
                             >
                                 <Icon name='save' />
-                                Salvar
+                                Registrar
                             </Button>
 
                         </div>

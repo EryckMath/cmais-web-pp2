@@ -15,7 +15,7 @@ export default function FormInstituicao() {
     const [cnpjInstituicao, setCnpjInstituicao] = useState();
     const [enderecoInstituicao, setEnderecoInstituicao] = useState();
     const [telefoneInstituicao, setTelefoneInstituicao] = useState();
-    const [finalidadeInstituicao, setFinalidadeInstituicao] = useState();
+    const [finalidade, setFinalidade] = useState();
     const [dataConstituicao, setDataConstituicao] = useState();
     const [emailInstituicao, setEmailInstituicao] = useState();
     const [redesSociaisInstituicao, setRedesSociaisIntituicao] = useState();
@@ -30,14 +30,14 @@ export default function FormInstituicao() {
 
     useEffect(() => {
         if (state != null && state.id != null) {
-            axios.get("http://localhost:3000/api/instituicao/" + state.id)
+            axios.get("http://localhost:8080/api/instituicao/" + state.id)
                 .then((response) => {
                     setIdInstituicao(response.data.id)
                     setNomeInstituicao(response.data.nomeInstituicao)
                     setCnpjInstituicao(response.data.cnpjInstituicao)
                     setEnderecoInstituicao(response.data.enderecoInstituicao)
                     setTelefoneInstituicao(response.data.telefoneInstituicao)
-                    setFinalidadeInstituicao(response.data.finalidadeInstituicao)
+                    setFinalidade(response.data.finalidade)
                     setDataConstituicao(formatarData(response.data.dataConstituicao))
                     setEmailInstituicao(response.data.emailInstituicao)
                     setRedesSociaisIntituicao(response.data.redesSociaisInstituicao)
@@ -69,7 +69,7 @@ export default function FormInstituicao() {
             cnpjInstituicao: cnpjInstituicao,
             enderecoInstituicao: enderecoInstituicao,
             telefoneInstituicao: telefoneInstituicao,
-            finalidadeInstituicao: finalidadeInstituicao,
+            finalidade: finalidade,
             dataConstituicao: dataConstituicao,
             emailInstituicao: emailInstituicao,
             redesSociaisInstituicao: redesSociaisInstituicao,
@@ -83,11 +83,11 @@ export default function FormInstituicao() {
         }
 
         if (idInstituicao != null) { //Alteração:
-            axios.put("http://localhost:3000/api/instituicao/" + idInstituicao, instituicaoRequest)
+            axios.put("http://localhost:8080/api/instituicao/" + idInstituicao, instituicaoRequest)
                 .then((response) => { console.log('Instituição alterada com sucesso.') })
                 .catch((error) => { console.log('Erro ao alterar uma instituição.') })
         } else { //Cadastro:
-            axios.post("http://localhost:3000/api/instituicao", instituicaoRequest)
+            axios.post("http://localhost:8080/api/instituicao", instituicaoRequest)
                 .then((response) => { console.log('Instituicao cadastrada com sucesso.') })
                 .catch((error) => { console.log('Erro ao incluir a instituicao.') })
         }
@@ -173,8 +173,8 @@ export default function FormInstituicao() {
                                     fluid
                                     label='Finalidade'
                                     maxLength="100"
-                                    value={finalidadeInstituicao}
-                                    onChange={e => setFinalidadeInstituicao(e.target.value)}
+                                    value={finalidade}
+                                    onChange={e => setFinalidade(e.target.value)}
                                 >
                                 </Form.Input>
 
@@ -316,7 +316,7 @@ export default function FormInstituicao() {
                                 onClick={() => salvar()}
                             >
                                 <Icon name='save' />
-                                Salvar
+                                Registrar
                             </Button>
 
                         </div>

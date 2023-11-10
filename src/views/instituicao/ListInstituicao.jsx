@@ -17,7 +17,7 @@ export default function ListInstituicao() {
 
     function carregarLista() {
 
-        axios.get("http://localhost:3000/api/instituicao")
+        axios.get("http://localhost:8080/api/instituicao")
             .then((response) => {
                 setLista(response.data)
             })
@@ -37,12 +37,12 @@ export default function ListInstituicao() {
     }
     async function remover() {
 
-        await axios.delete('http://localhost:3000/api/instituicao/' + idRemover)
+        await axios.delete('http://localhost:8080/api/instituicao/' + idRemover)
             .then((response) => {
 
                 console.log('Instituição removido com sucesso.')
 
-                axios.get("http://localhost:3000/api/instituicao")
+                axios.get("http://localhost:8080/api/instituicao")
                     .then((response) => {
                         setLista(response.data)
                     })
