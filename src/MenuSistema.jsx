@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Divider, Icon, Menu, Sidebar } from "semantic-ui-react";
 
 const MenuSistema = () => {
-    const [sidebarVisible, setSidebarVisible] = React.useState(false);
+    const [sidebarVisible, setSidebarVisible] = useState(false);
 
     const handleSidebarToggle = () => {
         setSidebarVisible(!sidebarVisible);
     };
 
+    const handleSidebarClose = () => {
+        setSidebarVisible(false);
+    };
+
     return (
         <>
             <Menu inverted style={{ backgroundColor: '#4755f5', color: 'white' }}>
-                <Menu.Item onClick={handleSidebarToggle} style={{ marginBottom: '0px' }}>
-                    <Icon name='bars' size='large' />
+                <Menu.Item onClick={handleSidebarToggle} style={{ display: 'flex', alignItems: 'center' }}>
+                    <Icon name={sidebarVisible ? 'close' : 'bars'} size='large' />
+                    <span style={{ marginLeft: '5px' }}>{sidebarVisible ? 'Fechar' : 'Menu'}</span>
                 </Menu.Item>
             </Menu>
 
@@ -25,48 +30,65 @@ const MenuSistema = () => {
                 vertical
                 visible={sidebarVisible}
                 width='wide'
-                style={{ backgroundColor: '#4755f5', color: 'white', paddingTop: '30px' }}
-                className="sidebar-wrapper" 
+                style={{ backgroundColor: '#4755f5', color: 'white', paddingTop: '30px', height: '100vh' }}
+                className="sidebar-wrapper"
             >
-                <Menu.Item
-                    name='home'
-                    as={Link}
-                    to='/'
-                    onClick={() => setSidebarVisible(false)}
-                    style={{ fontWeight: 'bold', marginBottom: '10px' }}
-                >
-                    Página Inicial
-                </Menu.Item>
-                <Divider inverted style={{ borderTop: '2px solid white', margin: '5px 0' }} />
-                <Menu.Item
-                    name='instituicao'
-                    as={Link}
-                    to='/form-instituicao'
-                    onClick={() => setSidebarVisible(false)}
-                    style={{ fontWeight: 'bold', marginBottom: '10px' }}
-                >
-                    Instituição
-                </Menu.Item>
-                <Divider inverted style={{ borderTop: '2px solid white', margin: '5px 0' }}  />
-                <Menu.Item
-                    name='mercado'
-                    as={Link}
-                    to='/form-mercado'
-                    onClick={() => setSidebarVisible(false)}
-                    style={{ fontWeight: 'bold', marginBottom: '10px' }}
-                >
-                    Mercado
-                </Menu.Item>
-                <Divider inverted style={{ borderTop: '2px solid white', margin: '5px 0' }} />
-                <Menu.Item
-                    name='produto'
-                    as={Link}
-                    to='/form-produto'
-                    onClick={() => setSidebarVisible(false)}
-                    style={{ fontWeight: 'bold', marginBottom: '10px' }}
-                >
-                    Produto
-                </Menu.Item>
+                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
+                    <div>
+                        <Menu.Item
+                            name='home'
+                            as={Link}
+                            to='/'
+                            onClick={() => setSidebarVisible(false)}
+                            style={{ fontWeight: 'bold', marginBottom: '10px' }}
+                        >
+                            Página Inicial
+                        </Menu.Item>
+                        <Divider inverted style={{ borderTop: '2px solid white', margin: '5px 0' }} />
+                        <Menu.Item
+                            name='instituicao'
+                            as={Link}
+                            to='/form-instituicao'
+                            onClick={() => setSidebarVisible(false)}
+                            style={{ fontWeight: 'bold', marginBottom: '10px' }}
+                        >
+                            Instituição
+                        </Menu.Item>
+                        <Divider inverted style={{ borderTop: '2px solid white', margin: '5px 0' }} />
+                        <Menu.Item
+                            name='mercado'
+                            as={Link}
+                            to='/form-mercado'
+                            onClick={() => setSidebarVisible(false)}
+                            style={{ fontWeight: 'bold', marginBottom: '10px' }}
+                        >
+                            Mercado
+                        </Menu.Item>
+                        <Divider inverted style={{ borderTop: '2px solid white', margin: '5px 0' }} />
+                        <Menu.Item
+                            name='produto'
+                            as={Link}
+                            to='/form-produto'
+                            onClick={() => setSidebarVisible(false)}
+                            style={{ fontWeight: 'bold', marginBottom: '10px' }}
+                        >
+                            Produto
+                        </Menu.Item>
+                    </div>
+                    <div style={{ textAlign: 'center', marginBottom: '10px' }}>
+                        <Menu.Item
+                            onClick={handleSidebarClose}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}
+                        >
+                            <Icon name='close' />
+                            <span style={{ marginLeft: '5px' }}>Fechar</span>
+                        </Menu.Item>
+                    </div>
+                </div>
             </Sidebar>
         </>
     );
