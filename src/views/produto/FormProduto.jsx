@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InputMask from 'react-input-mask';
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
 
@@ -84,20 +84,16 @@ export default function FormProduto() {
         <div>
             <MenuSistema />
 
-
             <div style={{ marginTop: '3%' }}>
-
-                <Container textAlign='justified' >
-
-                    {idProduto === undefined &&
-                        <h2> <span style={{ color: 'darkgray' }}> Produto &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro</h2>
-                    }
-                    {idProduto != undefined &&
-                        <h2> <span style={{ color: 'darkgray' }}> Produto &nbsp;<Icon name='angle double right' size="small" /> </span> Alteração</h2>
-                    }
+                <Container textAlign='justified'>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <h2 style={{ color: 'black', margin: '0 10px' }}>
+                            Produto &nbsp;<Icon name='angle double right' size='small' /> {idProduto === undefined ? 'Cadastro' : 'Alteração'}
+                        </h2>
+                        <div style={{ flex: 1, backgroundColor: 'orange', height: '4px' }}></div>
+                    </div>
 
                     <Divider />
-
                     <div style={{ marginTop: '4%' }}>
 
                         <Form>
@@ -131,7 +127,7 @@ export default function FormProduto() {
                                 <Form.Input
                                     fluid
                                     label='Data de fabricação'
-                                    width={6}
+                                    width={3}
                                 >
                                     <InputMask
                                         mask="99/99/9999"
@@ -145,7 +141,7 @@ export default function FormProduto() {
                                 <Form.Input
                                     fluid
                                     label='Data de validade'
-                                    width={6}
+                                    width={3}
                                 >
                                     <InputMask
                                         mask="99/99/9999"
@@ -159,7 +155,9 @@ export default function FormProduto() {
                                 <Form.Input
                                     required
                                     fluid
-                                    label='Quantidade'>
+                                    label='Quantidade'
+                                    width={5}
+                                >
                                     <InputMask
                                         value={quantidade}
                                         onChange={e => setQuantidade(e.target.value)}
@@ -169,7 +167,9 @@ export default function FormProduto() {
                                 <Form.Input
                                     required
                                     fluid
-                                    label='Observações'>
+                                    label='Observações'
+                                    width={5}
+                                >
                                     <InputMask
                                         value={observacoes}
                                         onChange={e => setObservacoes(e.target.value)}
@@ -180,15 +180,18 @@ export default function FormProduto() {
 
                             <Form.Group widths='equal'>
 
-                            <Form.Input
+                                <Form.Input
                                     required
                                     fluid
-                                    label='Anexe aqui uma ou mais imagens do produto'>
-                                    <InputMask
-                                        value={anexoImagem}
-                                        onChange={e => setAnexoImagem(e.target.value)}
-                                    />
-                                </Form.Input>
+                                    label='Anexe aqui uma ou mais imagens do produto'
+                                    type='file'
+                                    accept='image/*'
+                                    onChange={(e) => {
+                                        const selectedFile = e.target.files[0];
+                                        setAnexoImagem(selectedFile);
+                                    }}
+                                    style={{ textAlign: 'center' }}
+                                />
 
                             </Form.Group>
 
@@ -205,7 +208,7 @@ export default function FormProduto() {
                                 color='orange'
                             >
                                 <Icon name='reply' />
-                                Voltar
+                                <Link to={'/'}>Voltar</Link>
                             </Button>
 
                             <Button

@@ -40,7 +40,7 @@ const MenuSistema = () => {
                             as={Link}
                             to='/'
                             onClick={() => setSidebarVisible(false)}
-                            style={{ fontWeight: 'bold', marginBottom: '10px' }}
+                            style={{ borderBottom: '2px solid white', fontWeight: 'bold', marginBottom: '10px' }}
                         >
                             Página Inicial
                         </Menu.Item>
@@ -50,27 +50,27 @@ const MenuSistema = () => {
                             as={Link}
                             to='/form-instituicao'
                             onClick={() => setSidebarVisible(false)}
-                            style={{ fontWeight: 'bold', marginBottom: '10px' }}
+                            style={{ borderBottom: '2px solid white', fontWeight: 'bold', marginBottom: '10px' }}
                         >
                             Instituição
                         </Menu.Item>
-                        <Divider inverted style={{ borderTop: '2px solid white', margin: '5px 0' }} />
+                        <Divider inverted style={{ borderTop: '', margin: '5px 0' }} />
                         <Menu.Item
                             name='mercado'
                             as={Link}
                             to='/form-mercado'
                             onClick={() => setSidebarVisible(false)}
-                            style={{ fontWeight: 'bold', marginBottom: '10px' }}
+                            style={{ borderBottom: '2px solid white', fontWeight: 'bold', marginBottom: '10px' }}
                         >
                             Mercado
                         </Menu.Item>
-                        <Divider inverted style={{ borderTop: '2px solid white', margin: '5px 0' }} />
+                        <Divider inverted style={{ borderTop: '', margin: '5px 0' }} />
                         <Menu.Item
                             name='produto'
                             as={Link}
                             to='/form-produto'
                             onClick={() => setSidebarVisible(false)}
-                            style={{ fontWeight: 'bold', marginBottom: '10px' }}
+                            style={{ borderBottom: '2px solid white', fontWeight: 'bold', marginBottom: '10px' }}
                         >
                             Produto
                         </Menu.Item>

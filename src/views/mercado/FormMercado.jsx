@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InputMask from 'react-input-mask';
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 import MenuSistema from "../../MenuSistema";
 
@@ -70,18 +70,15 @@ export default function FormMercado() {
             <MenuSistema />
 
             <div style={{ marginTop: '3%' }}>
-
-                <Container textAlign='justified' >
-
-                    {idMercado === undefined &&
-                        <h2> <span style={{ color: 'darkgray' }}> Mercado &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro</h2>
-                    }
-                    {idMercado !== undefined &&
-                        <h2> <span style={{ color: 'darkgray' }}> Mercado &nbsp;<Icon name='angle double right' size="small" /> </span> Alteração</h2>
-                    }
+                <Container textAlign='justified'>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <h2 style={{ color: 'black', margin: '0 10px' }}>
+                            Mercado &nbsp;<Icon name='angle double right' size='small' /> {idMercado === undefined ? 'Cadastro' : 'Alteração'}
+                        </h2>
+                        <div style={{ flex: 1, backgroundColor: 'orange', height: '4px' }}></div>
+                    </div>
 
                     <Divider />
-
                     <div style={{ marginTop: '4%' }}>
 
                         <Form>
@@ -205,8 +202,8 @@ export default function FormMercado() {
                                 labelPosition='left'
                                 color='orange'
                             >
-                                <Icon name='reply' />
-                                Voltar
+                               <Icon name='reply' />
+                                <Link to={'/'}>Voltar</Link>
                             </Button>
 
                             <Button

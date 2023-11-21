@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InputMask from 'react-input-mask';
-import { useLocation, Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 import MenuSistema from "../../MenuSistema";
 
@@ -100,19 +100,15 @@ export default function FormInstituicao() {
             <MenuSistema />
 
             <div style={{ marginTop: '3%' }}>
-
-                <Container textAlign='justified' >
-
-                    {idInstituicao === undefined &&
-                        <h2> <span style={{ color: 'darkgray' }}> Instituição &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro</h2>
-                    }
-                    {idInstituicao !== undefined &&
-                        <h2> <span style={{ color: 'darkgray' }}> Instituição &nbsp;<Icon name='angle double right' size="small" /> </span> Alteração</h2>
-                    }
-
+                <Container textAlign='justified'>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <h2 style={{ color: 'black', margin: '0 10px' }}>
+                            Instituição &nbsp;<Icon name='angle double right' size='small' /> {idInstituicao === undefined ? 'Cadastro' : 'Alteração'}
+                        </h2>
+                        <div style={{ flex: 1, backgroundColor: 'orange', height: '4px' }}></div>
+                    </div>
 
                     <Divider />
-
                     <div style={{ marginTop: '4%' }}>
 
                         <Form>
@@ -215,13 +211,17 @@ export default function FormInstituicao() {
                                 </Form.Input>
 
                                 <Form.Input
+                                    required
                                     fluid
-                                    label='Anexe aqui comprovante de cadastro da instituição'
-                                    maxLength="100"
-                                    value={comprovanteCadastro}
-                                    onChange={e => setComprovanteCadastro(e.target.value)}
-                                >
-                                </Form.Input>
+                                    label='Anexe aqui o comprovante de cadastro da Instituição'
+                                    type='file'
+                                    accept='image/*'
+                                    onChange={(e) => {
+                                        const selectedFile = e.target.files[0];
+                                        setComprovanteCadastro(selectedFile);
+                                    }}
+                                    style={{ height: '38px' }}
+                                />
 
                             </Form.Group>
 
