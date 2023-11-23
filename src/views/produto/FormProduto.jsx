@@ -181,7 +181,7 @@ export default function FormProduto() {
                             <Form.Group widths='equal'>
 
                                 <Form.Input
-                                    required
+                                    //required
                                     fluid
                                     label='Anexe aqui uma ou mais imagens do produto'
                                     type='file'
