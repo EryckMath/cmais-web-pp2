@@ -141,7 +141,7 @@ export default function ListProduto() {
             >
                 <Header icon>
                     <Icon name='trash' />
-                    <div style={{ marginTop: '5%' }}> Tem certeza que deseja remover esse registro? </div>
+                    <div style={{ marginTop: '5%' }}> Tem certeza que deseja remover ddd esse registro? </div>
                 </Header>
                 <Modal.Actions>
                     <Button basic color='red' inverted onClick={() => setOpenModal(false)}>
