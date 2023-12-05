@@ -16,7 +16,7 @@ export default function FormProduto() {
     const [dataDeValidade, setDataDeValidade] = useState();
     const [quantidade, setQuantidade] = useState();
     const [observacoes, setObservacoes] = useState();
-    const [anexoImagem, setAnexoImagem] = useState();
+    const [imagem, setImagem] = useState();
 
 
     useEffect(() => {
@@ -32,7 +32,7 @@ export default function FormProduto() {
                     setDataDeValidade(formatarData(response.data.dataDeValidade))
                     setQuantidade(response.data.quantidade)
                     setObservacoes(response.data.observacoes)
-                    setAnexoImagem(response.data.anexoImagem)
+                    setImagem(response.data.imagem)
                 })
         }
     }, [state])
@@ -56,25 +56,17 @@ export default function FormProduto() {
             dataDeValidade: dataDeValidade,
             quantidade: quantidade,
             observacoes: observacoes,
-            anexoImagem: anexoImagem
+            imagem: imagem
         }
 
-        if (setIdProduto != null) { //Alteração:
+        if (idProduto != null) { //Alteração:
             axios.put("http://localhost:8080/api/produto/" + idProduto, produtoRequest)
-                .then((response) => {
-                    console.log('Produto alterado com sucesso.')
-                })
-                .catch((error) => {
-                    console.log('Erro ao alterar um produto.')
-                })
+                .then((response) => { console.log('Produto alterado com sucesso.') })
+                .catch((error) => { console.log('Erro ao alterar um produto.') })
         } else { //Cadastro:
             axios.post("http://localhost:8080/api/produto", produtoRequest)
-                .then((response) => {
-                    console.log('Produto cadastrado com sucesso.')
-                })
-                .catch((error) => {
-                    console.log('Erro ao incluir o produto.')
-                })
+                .then((response) => { console.log('Produto cadastrado com sucesso.') })
+                .catch((error) => { console.log('Erro ao incluir o produto.') })
         }
     }
 
@@ -188,7 +180,7 @@ export default function FormProduto() {
                                     accept='image/*'
                                     onChange={(e) => {
                                         const selectedFile = e.target.files[0];
-                                        setAnexoImagem(selectedFile);
+                                        setImagem(selectedFile);
                                     }}
                                     style={{ textAlign: 'center' }}
                                 />
