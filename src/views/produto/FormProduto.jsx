@@ -96,7 +96,7 @@ export default function FormProduto() {
                     <Divider />
                     <div style={{ marginTop: '4%' }}>
 
-                        <Form>
+                        <Form enctype="multipart/form-data">
 
                             <Form.Group widths='equal'>
 

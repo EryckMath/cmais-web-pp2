@@ -111,7 +111,7 @@ export default function FormInstituicao() {
                     <Divider />
                     <div style={{ marginTop: '4%' }}>
 
-                        <Form>
+                        <Form enctype="multipart/form-data">
 
                             <Form.Group widths='equal'>
 
@@ -211,7 +211,7 @@ export default function FormInstituicao() {
                                 </Form.Input>
 
                                 <Form.Input
-                                    required
+                                    //required
                                     fluid
                                     label='Anexe aqui o comprovante de cadastro da Instituição'
                                     type='file'
