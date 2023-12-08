@@ -17,7 +17,7 @@ export default function ListProduto() {
 
     function carregarLista() {
 
-        axios.get("http://localhost:3000/api/produto")
+        axios.get("http://localhost:8080/api/produto")
             .then((response) => {
                 setLista(response.data)
             })
@@ -37,12 +37,12 @@ export default function ListProduto() {
     }
     async function remover() {
 
-        await axios.delete('http://localhost:3000/api/produto/' + idRemover)
+        await axios.delete('http://localhost:8080/api/produto/' + idRemover)
             .then((response) => {
 
                 console.log('Produto removido com sucesso.')
 
-                axios.get("http://localhost:3000/api/produto")
+                axios.get("http://localhost:8080/api/produto")
                     .then((response) => {
                         setLista(response.data)
                     })
@@ -98,7 +98,7 @@ export default function ListProduto() {
                                         <Table.Cell>{produto.CodigoDeBarrasDoProduto}</Table.Cell>
                                         <Table.Cell>{produto.Descrição}</Table.Cell>
                                         <Table.Cell>{formatarData(produto.DataDeFabricação)}</Table.Cell>
-                                         <Table.Cell>{formatarData(produto.DataDeValidade)}</Table.Cell>
+                                        <Table.Cell>{formatarData(produto.DataDeValidade)}</Table.Cell>
                                         <Table.Cell>{produto.Quantidade}</Table.Cell>
                                         <Table.Cell>{produto.Observações}</Table.Cell>
                                         <Table.Cell>{produto.AnexeAquiUmaOuMaisImagensDoProduto}</Table.Cell>

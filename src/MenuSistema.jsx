@@ -1,55 +1,97 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu } from "semantic-ui-react";
+import { Divider, Icon, Menu, Sidebar } from "semantic-ui-react";
 
-class MenuSistema extends React.Component {
+const MenuSistema = () => {
+    const [sidebarVisible, setSidebarVisible] = useState(false);
 
-    state = {
-        activeItem: 'home'
-    }
+    const handleSidebarToggle = () => {
+        setSidebarVisible(!sidebarVisible);
+    };
 
-    handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+    const handleSidebarClose = () => {
+        setSidebarVisible(false);
+    };
 
-    render() {
-        return (
-            <>
-                <Menu inverted>
+    return (
+        <>
+            <Menu inverted style={{ backgroundColor: '#4755f5', color: 'white' }}>
+                <Menu.Item onClick={handleSidebarToggle} style={{ display: 'flex', alignItems: 'center' }}>
+                    <Icon name={sidebarVisible ? 'close' : 'bars'} size='large' />
+                    <span style={{ marginLeft: '5px' }}>{sidebarVisible ? 'Fechar' : 'Menu'}</span>
+                </Menu.Item>
+            </Menu>
 
-                    <Menu.Item
-                        name='home'
-                        active={this.state.activeItem === 'Página Inicial'}
-                        onClick={this.handleItemClick}
-                        as={Link}
-                        to='/'
-                    />
-                    <Menu.Item
-                        name='instituicao'
-                        active={this.state.activeItem === 'Instituição'}
-                        onClick={this.handleItemClick}
-                        as={Link}
-                        to='/form-instituicao'
-                    />
-
-                    <Menu.Item
-                        name='mercado'
-                        active={this.state.activeItem === 'Mercado'}
-                        onClick={this.handleItemClick}
-                        as={Link}
-                        to='/form-mercado'
-                    />
-
-                    <Menu.Item
-                        name='produto'
-                        active={this.state.activeItem === 'Produto'}
-                        onClick={this.handleItemClick}
-                        as={Link}
-                        to='/form-produto'
-                    />
-
-                </Menu>
-            </>
-        )
-    }
-}
+            <Sidebar
+                as={Menu}
+                animation='overlay'
+                direction='left'
+                inverted
+                vertical
+                visible={sidebarVisible}
+                width='wide'
+                style={{ backgroundColor: '#4755f5', color: 'white', paddingTop: '30px', height: '100vh' }}
+                className="sidebar-wrapper"
+            >
+                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
+                    <div>
+                        <Menu.Item
+                            name='home'
+                            as={Link}
+                            to='/'
+                            onClick={() => setSidebarVisible(false)}
+                            style={{ borderBottom: '2px solid white', fontWeight: 'bold', marginBottom: '10px' }}
+                        >
+                            Página Inicial
+                        </Menu.Item>
+                        <Divider inverted style={{ borderTop: '2px solid white', margin: '5px 0' }} />
+                        <Menu.Item
+                            name='instituicao'
+                            as={Link}
+                            to='/form-instituicao'
+                            onClick={() => setSidebarVisible(false)}
+                            style={{ borderBottom: '2px solid white', fontWeight: 'bold', marginBottom: '10px' }}
+                        >
+                            Instituição
+                        </Menu.Item>
+                        <Divider inverted style={{ borderTop: '', margin: '5px 0' }} />
+                        <Menu.Item
+                            name='mercado'
+                            as={Link}
+                            to='/form-mercado'
+                            onClick={() => setSidebarVisible(false)}
+                            style={{ borderBottom: '2px solid white', fontWeight: 'bold', marginBottom: '10px' }}
+                        >
+                            Mercado
+                        </Menu.Item>
+                        <Divider inverted style={{ borderTop: '', margin: '5px 0' }} />
+                        <Menu.Item
+                            name='produto'
+                            as={Link}
+                            to='/form-produto'
+                            onClick={() => setSidebarVisible(false)}
+                            style={{ borderBottom: '2px solid white', fontWeight: 'bold', marginBottom: '10px' }}
+                        >
+                            Produto
+                        </Menu.Item>
+                    </div>
+                    <div style={{ textAlign: 'center', marginBottom: '10px' }}>
+                        <Menu.Item
+                            onClick={handleSidebarClose}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}
+                        >
+                            <Icon name='close' />
+                            <span style={{ marginLeft: '5px' }}>Fechar</span>
+                        </Menu.Item>
+                    </div>
+                </div>
+            </Sidebar>
+        </>
+    );
+};
 
 export default MenuSistema;

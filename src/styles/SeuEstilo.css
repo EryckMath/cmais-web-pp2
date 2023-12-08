@@ -1,0 +1,5 @@
+.background-image {
+    background-image: url('/public/PlanoDeFundo.jpg'); /* Substitua pelo caminho da sua imagem */
+    background-size: cover; /* Ajusta o tamanho da imagem */
+    /* Outras propriedades de estilo, como cor do texto, etc. */
+}
