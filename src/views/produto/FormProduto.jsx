@@ -133,7 +133,7 @@ export default function FormProduto() {
 
                                 <Form.Input
                                     fluid
-                                    label='Data de validade 2'
+                                    label='Data de validade'
                                     width={3}
                                 >
                                     <InputMask
