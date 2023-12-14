@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import InputMask from 'react-input-mask';
 import { Link, useLocation } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
+import { mensagemErro, notifyError, notifySuccess } from '../../views/util/Util';
 import MenuSistema from "../../MenuSistema";
 
 export default function FormInstituicao() {
@@ -88,8 +89,16 @@ export default function FormInstituicao() {
                 .catch((error) => { console.log('Erro ao alterar uma instituição.') })
         } else { //Cadastro:
             axios.post("http://localhost:8080/api/instituicao", instituicaoRequest)
-                .then((response) => { console.log('Instituicao cadastrada com sucesso.') })
-                .catch((error) => { console.log('Erro ao incluir a instituicao.') })
+                .then((response) => { notifySuccess('Instituicao cadastrada com sucesso.') })
+                .catch((error) => {
+                    if (error.response) {
+                        notifyError(error.response.data.errors[0].defaultMessage)
+                    }
+                    else {
+                        notifyError('Erro ao incluir a instituicao.')
+                    }
+                }
+                )
         }
     }
 
@@ -303,7 +312,7 @@ export default function FormInstituicao() {
                                 color='orange'
                             >
                                 <Icon name='reply' />
-                                <Link to={'/'}>Voltar</Link>
+                                <Link to={'/list-instituicao'}>Voltar</Link>
                             </Button>
 
                             <Button

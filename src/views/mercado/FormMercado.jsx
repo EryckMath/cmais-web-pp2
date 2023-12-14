@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import InputMask from 'react-input-mask';
 import { Link, useLocation } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
+import { mensagemErro, notifyError, notifySuccess } from '../../views/util/Util';
 import MenuSistema from "../../MenuSistema";
 
 export default function FormMercado() {
@@ -58,8 +59,16 @@ export default function FormMercado() {
                 .catch((error) => { console.log('Erro ao alterar uma mercado.') })
         } else { //Cadastro:
             axios.post("http://localhost:8080/api/Mercado", MercadoRequest)
-                .then((response) => { console.log('Mercado cadastrada com sucesso.') })
-                .catch((error) => { console.log('Erro ao incluir a mercado.') })
+                .then((response) => { notifySuccess('Mercado cadastrada com sucesso.') })
+                .catch((error) => {
+                    if (error.response) {
+                        notifyError(error.response.data.errors[0].defaultMessage)
+                    }
+                    else {
+                        notifyError('Erro ao incluir a mercado.')
+                    }
+                }
+                )
         }
     }
 
@@ -111,7 +120,7 @@ export default function FormMercado() {
 
                             <Form.Group widths='equal'>
 
-                            <Form.Input
+                                <Form.Input
                                     required
                                     fluid
                                     label='Tipo Empreendimento'>
@@ -203,8 +212,8 @@ export default function FormMercado() {
                                 labelPosition='left'
                                 color='orange'
                             >
-                               <Icon name='reply' />
-                                <Link to={'/'}>Voltar</Link>
+                                <Icon name='reply' />
+                                <Link to={'/list-mercado'}>Voltar</Link>
                             </Button>
 
                             <Button

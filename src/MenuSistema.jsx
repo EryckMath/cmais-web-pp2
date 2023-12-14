@@ -48,7 +48,7 @@ const MenuSistema = () => {
                         <Menu.Item
                             name='instituicao'
                             as={Link}
-                            to='/form-instituicao'
+                            to='/list-instituicao'
                             onClick={() => setSidebarVisible(false)}
                             style={{ borderBottom: '2px solid white', fontWeight: 'bold', marginBottom: '10px' }}
                         >
@@ -58,7 +58,7 @@ const MenuSistema = () => {
                         <Menu.Item
                             name='mercado'
                             as={Link}
-                            to='/form-mercado'
+                            to='/list-mercado'
                             onClick={() => setSidebarVisible(false)}
                             style={{ borderBottom: '2px solid white', fontWeight: 'bold', marginBottom: '10px' }}
                         >
@@ -68,7 +68,7 @@ const MenuSistema = () => {
                         <Menu.Item
                             name='produto'
                             as={Link}
-                            to='/form-produto'
+                            to='/list-produto'
                             onClick={() => setSidebarVisible(false)}
                             style={{ borderBottom: '2px solid white', fontWeight: 'bold', marginBottom: '10px' }}
                         >

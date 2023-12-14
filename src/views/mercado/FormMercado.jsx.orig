@@ -11,10 +11,7 @@ export default function FormMercado() {
     const [idMercado, setIdMercado] = useState();
 
     const [nomeEmpreendimento, setNomeEmprendimento] = useState();
-<<<<<<< HEAD
-=======
     const [cnpjEmpreendimento, setCnpjEmpreendimento] = useState();
->>>>>>> 44a72ce91bd2f405f8caa4177c1116196aa6de74
     const [tipoEmpreendimento, setTipoEmpreendimento] = useState();
     const [telefoneContato, setTelefoneContato] = useState();
     const [endereco, setEndereco] = useState();
@@ -29,10 +26,7 @@ export default function FormMercado() {
                 .then((response) => {
                     setIdMercado(response.data.id)
                     setNomeEmprendimento(response.data.nomeEmpreendimento)
-<<<<<<< HEAD
-=======
                     setCnpjEmpreendimento(response.data.cnpjEmpreendimento)
->>>>>>> 44a72ce91bd2f405f8caa4177c1116196aa6de74
                     setTipoEmpreendimento(response.data.tipoEmpreendimento)
                     setTelefoneContato(response.data.telefoneContato)
                     setEndereco(response.data.endereco)
@@ -48,10 +42,7 @@ export default function FormMercado() {
 
         let MercadoRequest = {
             nomeEmpreendimento: nomeEmpreendimento,
-<<<<<<< HEAD
-=======
             cnpjEmpreendimento: cnpjEmpreendimento,
->>>>>>> 44a72ce91bd2f405f8caa4177c1116196aa6de74
             tipoEmpreendimento: tipoEmpreendimento,
             telefoneContato: telefoneContato,
             endereco: endereco,
@@ -79,17 +70,6 @@ export default function FormMercado() {
             <MenuSistema />
 
             <div style={{ marginTop: '3%' }}>
-<<<<<<< HEAD
-
-                <Container textAlign='justified' >
-
-                    {idMercado === undefined &&
-                        <h2> <span style={{ color: 'darkgray' }}> mercado &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro</h2>
-                    }
-                    {idMercado !== undefined &&
-                        <h2> <span style={{ color: 'darkgray' }}> mercado &nbsp;<Icon name='angle double right' size="small" /> </span> Alteração</h2>
-                    }
-=======
                 <Container textAlign='justified'>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <h2 style={{ color: 'black', margin: '0 10px' }}>
@@ -97,7 +77,6 @@ export default function FormMercado() {
                         </h2>
                         <div style={{ flex: 1, backgroundColor: 'orange', height: '4px' }}></div>
                     </div>
->>>>>>> 44a72ce91bd2f405f8caa4177c1116196aa6de74
 
                     <Divider />
                     <div style={{ marginTop: '4%' }}>
@@ -121,15 +100,9 @@ export default function FormMercado() {
                                     label='CNPJ'>
                                     <InputMask
                                         required
-<<<<<<< HEAD
-                                        label='Qual o seu tipo de empreendimento?'
-                                        value={tipoEmpreendimento}
-                                        onChange={e => setTipoEmpreendimento(e.target.value)}
-=======
                                         label='CNPJ'
                                         value={cnpjEmpreendimento}
                                         onChange={e => setCnpjEmpreendimento(e.target.value)}
->>>>>>> 44a72ce91bd2f405f8caa4177c1116196aa6de74
                                     />
                                 </Form.Input>
 
