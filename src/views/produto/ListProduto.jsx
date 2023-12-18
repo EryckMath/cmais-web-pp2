@@ -22,19 +22,27 @@ export default function ListProduto() {
                 setLista(response.data)
             })
     }
+
     function formatarData(dataParam) {
 
-        if (dataParam === null || dataParam === '' || dataParam === undefined) {
+        if (dataParam === null || dataParam === undefined || typeof dataParam !== 'string') {
             return ''
         }
 
-        let arrayData = dataParam.split('-');
+        const match = dataParam.match(/^\d{4}-\d{2}-\d{2}$/);
+        if (!match) {
+            return ''
+        }
+
+        let arrayData = match[0].split('-');
         return arrayData[2] + '/' + arrayData[1] + '/' + arrayData[0];
     }
+
     function confirmaRemover(id) {
         setOpenModal(true)
         setIdRemover(id)
     }
+
     async function remover() {
 
         await axios.delete('http://localhost:8080/api/produto/' + idRemover)
@@ -56,18 +64,23 @@ export default function ListProduto() {
     return (
         <div>
             <MenuSistema />
+
             <div style={{ marginTop: '3%' }}>
+                <Container textAlign='justified'>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <h2 style={{ color: 'black', margin: '0 10px' }}>
+                            Produto &nbsp;<Icon name='angle double right' size='small' />
+                        </h2>
+                        <div style={{ flex: 1, backgroundColor: 'orange', height: '4px' }}></div>
+                    </div>
 
-                <Container textAlign='justified' >
-
-                    <h2> Produto </h2>
                     <Divider />
 
                     <div style={{ marginTop: '4%' }}>
                         <Button
                             label='Novo'
                             circular
-                            color='orange'
+                            color='blue'
                             icon='clipboard outline'
                             floated='right'
                             as={Link}
@@ -101,7 +114,7 @@ export default function ListProduto() {
                                         <Table.Cell>{formatarData(produto.DataDeValidade)}</Table.Cell>
                                         <Table.Cell>{produto.Quantidade}</Table.Cell>
                                         <Table.Cell>{produto.Observações}</Table.Cell>
-                                        <Table.Cell>{produto.AnexeAquiUmaOuMaisImagensDoProduto}</Table.Cell>
+                                        <Table.Cell>{produto.Imagem}</Table.Cell>
                                         <Table.Cell textAlign='center'>
 
                                             <Button

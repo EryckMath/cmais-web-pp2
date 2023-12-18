@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from './views/home/Home';
 import FormInstituicao from './views/instituicao/FormInstituicao';
 import ListInstituicao from './views/instituicao/ListInstituicao';
+import FormLogin from './views/login/FormLogin';
 import FormMercado from './views/mercado/FormMercado';
 import ListMercado from './views/mercado/ListMercado';
 import FormProduto from './views/produto/FormProduto';
@@ -20,6 +21,7 @@ function Rotas() {
                 <Route path="list-mercado" element={<ListMercado />} />
                 <Route path="form-produto" element={<FormProduto />} />
                 <Route path="list-produto" element={<ListProduto />} />
+                <Route path="form-login" element={<FormLogin />} />
             </Routes>
         </>
     )

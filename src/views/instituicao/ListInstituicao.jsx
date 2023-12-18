@@ -22,19 +22,27 @@ export default function ListInstituicao() {
                 setLista(response.data)
             })
     }
+
     function formatarData(dataParam) {
 
-        if (dataParam === null || dataParam === '' || dataParam === undefined) {
+        if (dataParam === null || dataParam === undefined || typeof dataParam !== 'string') {
             return ''
         }
 
-        let arrayData = dataParam.split('-');
+        const match = dataParam.match(/^\d{4}-\d{2}-\d{2}$/);
+        if (!match) {
+            return ''
+        }
+
+        let arrayData = match[0].split('-');
         return arrayData[2] + '/' + arrayData[1] + '/' + arrayData[0];
     }
+
     function confirmaRemover(id) {
         setOpenModal(true)
         setIdRemover(id)
     }
+
     async function remover() {
 
         await axios.delete('http://localhost:8080/api/instituicao/' + idRemover)
@@ -48,7 +56,7 @@ export default function ListInstituicao() {
                     })
             })
             .catch((error) => {
-                console.log('Erro ao remover um instituição.')
+                console.log('Erro ao remover uma instituição.')
             })
         setOpenModal(false)
     }
@@ -56,18 +64,23 @@ export default function ListInstituicao() {
     return (
         <div>
             <MenuSistema />
+
             <div style={{ marginTop: '3%' }}>
+                <Container textAlign='justified'>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <h2 style={{ color: 'black', margin: '0 10px' }}>
+                            Instituição &nbsp;<Icon name='angle double right' size='small' />
+                        </h2>
+                        <div style={{ flex: 1, backgroundColor: 'orange', height: '4px' }}></div>
+                    </div>
 
-                <Container textAlign='justified' >
-
-                    <h2> Instituição </h2>
                     <Divider />
 
                     <div style={{ marginTop: '4%' }}>
                         <Button
                             label='Novo'
                             circular
-                            color='orange'
+                            color='blue'
                             icon='clipboard outline'
                             floated='right'
                             as={Link}
@@ -80,20 +93,9 @@ export default function ListInstituicao() {
                             <Table.Header>
                                 <Table.Row>
                                     <Table.HeaderCell>Nome da instituição</Table.HeaderCell>
-                                    <Table.HeaderCell>CNPJ da instituição</Table.HeaderCell>
                                     <Table.HeaderCell>Endereço da instituição</Table.HeaderCell>
                                     <Table.HeaderCell>Telefone da instituição</Table.HeaderCell>
-                                    <Table.HeaderCell>Finalidade</Table.HeaderCell>
-                                    <Table.HeaderCell>Email da instituicao</Table.HeaderCell>
                                     <Table.HeaderCell>Redes sociais da intituição</Table.HeaderCell>
-                                    <Table.HeaderCell>Data da constituição</Table.HeaderCell>
-                                    <Table.HeaderCell>Comprovante de cadastro</Table.HeaderCell>
-                                    <Table.HeaderCell>Nome do responsavel</Table.HeaderCell>
-                                    <Table.HeaderCell>CPF do responsavel</Table.HeaderCell>
-                                    <Table.HeaderCell>Telefone do responsavel</Table.HeaderCell>
-                                    <Table.HeaderCell>Email do responsavel</Table.HeaderCell>
-                                    <Table.HeaderCell>Cargo do responsavel</Table.HeaderCell>
-                                    <Table.HeaderCell>Senha de acesso</Table.HeaderCell>
                                     <Table.HeaderCell textAlign='center'>Ações</Table.HeaderCell>
                                 </Table.Row>
                             </Table.Header>
@@ -104,21 +106,9 @@ export default function ListInstituicao() {
 
                                     <Table.Row key={instituicao.id}>
                                         <Table.Cell>{instituicao.NomeInstituicao}</Table.Cell>
-                                        <Table.Cell>{instituicao.CNPJInstituicao}</Table.Cell>
                                         <Table.Cell>{instituicao.EnderecoInstituicao}</Table.Cell>
                                         <Table.Cell>{instituicao.TelefoneInstituicao}</Table.Cell>
-                                        <Table.Cell>{instituicao.Finalidade}</Table.Cell>
-                                        <Table.Cell>{instituicao.EmailInstituicao}</Table.Cell>
                                         <Table.Cell>{instituicao.RedesSociaisIntituicao}</Table.Cell>
-                                        <Table.Cell>{formatarData(instituicao.DataConstituicao)}</Table.Cell>
-                                        <Table.Cell>{instituicao.ComprovanteCadastro}</Table.Cell>
-                                        <Table.Cell>{instituicao.Observações}</Table.Cell>
-                                        <Table.Cell>{instituicao.NomeResponsavel}</Table.Cell>
-                                        <Table.Cell>{instituicao.CpfReponsavel}</Table.Cell>
-                                        <Table.Cell>{instituicao.TelefoneResponsavel}</Table.Cell>
-                                        <Table.Cell>{instituicao.EmailResponsavel}</Table.Cell>
-                                        <Table.Cell>{instituicao.CargoReponsavel}</Table.Cell>
-                                        <Table.Cell>{instituicao.SenhaAcesso}</Table.Cell>
                                         <Table.Cell textAlign='center'>
 
                                             <Button

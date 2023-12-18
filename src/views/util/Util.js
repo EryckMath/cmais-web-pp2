@@ -10,4 +10,4 @@ export const notifySuccess = (mensagem) => toast.success(mensagem, { position: t
 
 export const notifyError = (mensagem) => toast.error(mensagem, { position: toast.POSITION.TOP_CENTER });
 
-export const mensagemErro = "Ocorreu algum erro inesperado."
+export const mensagemErro = "Aconteceu algo inesperado. Tente novamente!"

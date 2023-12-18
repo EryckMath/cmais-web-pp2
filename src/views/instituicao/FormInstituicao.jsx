@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import InputMask from 'react-input-mask';
 import { Link, useLocation } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
-import { mensagemErro, notifyError, notifySuccess } from '../../views/util/Util';
 import MenuSistema from "../../MenuSistema";
+import { mensagemErro, notifyError, notifySuccess } from '../../views/util/Util';
 
 export default function FormInstituicao() {
 
@@ -55,11 +55,16 @@ export default function FormInstituicao() {
 
     function formatarData(dataParam) {
 
-        if (dataParam === null || dataParam === '' || dataParam === undefined) {
+        if (dataParam === null || dataParam === undefined || typeof dataParam !== 'string') {
             return ''
         }
 
-        let arrayData = dataParam.split('-');
+        const match = dataParam.match(/^\d{4}-\d{2}-\d{2}$/);
+        if (!match) {
+            return ''
+        }
+
+        let arrayData = match[0].split('-');
         return arrayData[2] + '/' + arrayData[1] + '/' + arrayData[0];
     }
 
@@ -86,8 +91,17 @@ export default function FormInstituicao() {
         if (idInstituicao != null) { //Alteração:
             axios.put("http://localhost:8080/api/instituicao/" + idInstituicao, instituicaoRequest)
                 .then((response) => { console.log('Instituição alterada com sucesso.') })
-                .catch((error) => { console.log('Erro ao alterar uma instituição.') })
-        } else { //Cadastro:
+                .catch((error) => {
+                    if (error.response) {
+                        notifyError(error.response.data.errors[0].defaultMessage)
+                    }
+                    else {
+                        notifyError(mensagemErro)
+                    }
+                }
+                )
+        }
+        else { //Cadastro:
             axios.post("http://localhost:8080/api/instituicao", instituicaoRequest)
                 .then((response) => { notifySuccess('Instituicao cadastrada com sucesso.') })
                 .catch((error) => {
@@ -95,7 +109,7 @@ export default function FormInstituicao() {
                         notifyError(error.response.data.errors[0].defaultMessage)
                     }
                     else {
-                        notifyError('Erro ao incluir a instituicao.')
+                        notifyError(mensagemErro)
                     }
                 }
                 )

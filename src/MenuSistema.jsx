@@ -74,6 +74,15 @@ const MenuSistema = () => {
                         >
                             Produto
                         </Menu.Item>
+                        <Menu.Item
+                            name='login'
+                            as={Link}
+                            to='/form-login'
+                            onClick={() => setSidebarVisible(false)}
+                            style={{ borderBottom: '2px solid white', fontWeight: 'bold', marginBottom: '10px' }}
+                        >
+                            Login
+                        </Menu.Item>
                     </div>
                     <div style={{ textAlign: 'center', marginBottom: '10px' }}>
                         <Menu.Item

@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import InputMask from 'react-input-mask';
 import { Link, useLocation } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
-import { mensagemErro, notifyError, notifySuccess } from '../../views/util/Util';
 import MenuSistema from "../../MenuSistema";
+import { mensagemErro, notifyError, notifySuccess } from '../../views/util/Util';
 
 export default function FormMercado() {
 
@@ -23,7 +23,7 @@ export default function FormMercado() {
 
     useEffect(() => {
         if (state != null && state.id != null) {
-            axios.get("http://localhost:8080/api/Mercado/" + state.id)
+            axios.get("http://localhost:8080/api/mercado/" + state.id)
                 .then((response) => {
                     setIdMercado(response.data.id)
                     setNomeEmprendimento(response.data.nomeEmpreendimento)
@@ -54,18 +54,27 @@ export default function FormMercado() {
         }
 
         if (idMercado != null) { //Alteração:
-            axios.put("http://localhost:8080/api/Mercado/" + idMercado, MercadoRequest)
+            axios.put("http://localhost:8080/api/mercado/" + idMercado, MercadoRequest)
                 .then((response) => { console.log('mercado alterada com sucesso.') })
-                .catch((error) => { console.log('Erro ao alterar uma mercado.') })
-        } else { //Cadastro:
-            axios.post("http://localhost:8080/api/Mercado", MercadoRequest)
+                .catch((error) => {
+                    if (error.response) {
+                        notifyError(error.response.data.errors[0].defaultMessage)
+                    }
+                    else {
+                        notifyError(mensagemErro)
+                    }
+                }
+                )
+        }
+        else { //Cadastro:
+            axios.post("http://localhost:8080/api/mercado", MercadoRequest)
                 .then((response) => { notifySuccess('Mercado cadastrada com sucesso.') })
                 .catch((error) => {
                     if (error.response) {
                         notifyError(error.response.data.errors[0].defaultMessage)
                     }
                     else {
-                        notifyError('Erro ao incluir a mercado.')
+                        notifyError(mensagemErro)
                     }
                 }
                 )
